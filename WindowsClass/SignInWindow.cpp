@@ -56,7 +56,6 @@ void signInWindow::on_signInButton_clicked() {
     return;
   }
 
-
   // Если пользователь с такими логином и паролем не существует в БД.
   if (!(dbWorks::instance().userExists(login, password))) {
     QMessageBox::critical(this,
