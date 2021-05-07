@@ -19,7 +19,7 @@ bool dbWorks::userExists(const QString login, const QString password) {
   QSqlQuery q;
   q.prepare("SELECT EXISTS (SELECT * FROM USERS WHERE login = :login AND password = :password);");
   q.bindValue(":login", login);
-  q.bindValue(":password", password);
+  q.bindValue(":password", stringToSha256(password));
   q.exec();
   q.next();
   return q.value(0).toBool();
@@ -69,7 +69,7 @@ bool dbWorks::userRegistration(const QString login, const QString password) {
   QSqlQuery q;
   q.prepare("INSERT INTO USERS (login, password) VALUES (:login, :password);");
   q.bindValue(":login", login);
-  q.bindValue(":password", password);
+  q.bindValue(":password", stringToSha256(password));
   bool isUserCreated = q.exec();
 
   setCurrentUser(login);
@@ -129,4 +129,8 @@ dbWorks::dbWorks()
 
   if (!db.open())
     qDebug() << db.lastError();
+}
+
+QString dbWorks::stringToSha256(const QString str) {
+  return QCryptographicHash::hash(str.toUtf8(), QCryptographicHash::Sha256).toHex();
 }
