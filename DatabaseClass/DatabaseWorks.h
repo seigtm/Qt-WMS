@@ -87,7 +87,5 @@ private:
 
   // Преобразует строку в Sha256-хэшированную строку.
   // Используется для шифрования паролей пользователей.
-  QString stringToSha256(const QString str) {
-    return QCryptographicHash::hash(str.toUtf8(), QCryptographicHash::Sha256).toHex();
-  }
+  QString stringToSha256(const QString str);
 };
