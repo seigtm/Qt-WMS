@@ -6,6 +6,8 @@
 #include <QSqlError>
 #include <QDir>
 
+enum class UserRoles;
+
 class dbWorks {
   // TODO: Fix this path to database.
   const QString pathToDB = "C:/Users/seigt/OneDrive/Documents/GitHub/PRACTICE/SportLuxApp/Databases/SportLux.db";
@@ -66,6 +68,9 @@ public:
 
   // Получение логина текущего пользователя (по полю currentUserID).
   QString getUserLogin();
+
+  // Получение роли текущего пользователя (по полю currentUserID).
+  UserRoles getUserRole();
 
   // Деструктор.
   ~dbWorks();

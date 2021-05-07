@@ -15,3 +15,10 @@ enum class ButtonNewTypes {
   COUNTRY,
   SUPPLIER
 };
+
+// Список перечисления для двух
+//  типов ролей пользователей.
+enum class UserRoles {
+  GUEST,
+  USER
+};

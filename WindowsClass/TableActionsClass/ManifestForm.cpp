@@ -23,6 +23,7 @@ ManifestForm::ManifestForm(TableTypes type,
                     "FROM WAREHOUSE "
                     "INNER JOIN PRODUCTS ON "
                     "PRODUCTS.idProduct = WAREHOUSE.idProduct "
+                    "ORDER BY idPosition DESC "
                     "LIMIT " + QString::number(rowCount) + ";");
   }
   else if (tt == TableTypes::SHIPMENTS) {
@@ -33,6 +34,7 @@ ManifestForm::ManifestForm(TableTypes type,
                     "FROM SHIPMENTS "
                     "INNER JOIN PRODUCTS ON "
                     "PRODUCTS.idProduct = SHIPMENTS.idProduct "
+                    "ORDER BY idPosition DESC "
                     "LIMIT " + QString::number(rowCount) + ";");
   }
   else {

@@ -22,8 +22,13 @@ TableWindow::TableWindow(TableTypes tableType, QWidget *parent) :
     model->setTable("WAREHOUSE");
   else if (tt == TableTypes::SHIPMENTS)
     model->setTable("SHIPMENTS");
-  else if (tt == TableTypes::STOCK)
+  else if (tt == TableTypes::STOCK) {
     model->setTable("PRODUCTS");
+
+    // Нам не нужно делать накладные по списку товаров на складе,
+    //  потому можно в принципе скрыть эту кнопку.
+    ui->manifestButton->hide();
+  }
   else {
     QMessageBox::critical(this,
                           "Критическая ошибка!",
@@ -106,8 +111,16 @@ TableWindow::TableWindow(TableTypes tableType, QWidget *parent) :
   // Скрываем вертикальные заголовки представления.
   ui->tableView->verticalHeader()->hide();
 
-  // Запрещаем редактирование ячеек таблицы.
-  //   ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+  // Если роль пользователя - гость, меняем доступный ему функционал.
+  if (dbWorks::instance().getUserRole() == UserRoles::GUEST) {
+
+    // Запрещаем редактирование ячеек таблицы.
+    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    // Скрываем кнопки добавления и удаления записей.
+    ui->addButton->setVisible(false);
+    ui->deleteButton->setVisible(false);
+  }
 
   // Устанавливаем тип выделения в таблице на "Выделять один ряд".
   //   ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -161,8 +174,6 @@ void TableWindow::on_deleteButton_clicked() {
   // Получаем id выбранной записи в таблице.
   QModelIndex currentIndex = ui->tableView->currentIndex();
   int id = currentIndex.sibling(currentIndex.row(), 0).data().toInt();
-
-  // qDebug() << "id = " << id;
 
   // Выводим диалоговое окно для подтверждения операции.
   int ret = QMessageBox::question(this,

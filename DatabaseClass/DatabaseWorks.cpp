@@ -1,4 +1,5 @@
 #include "DatabaseWorks.h"
+#include "Enums.h"
 
 dbWorks& dbWorks::instance() {
   static dbWorks dbw;
@@ -96,6 +97,16 @@ QString dbWorks::getUserLogin() {
   q.next();
 
   return q.value(0).toString();
+}
+
+UserRoles dbWorks::getUserRole() {
+  QSqlQuery q;
+  q.prepare("SELECT role FROM USERS WHERE idUser = :currentUserID;");
+  q.bindValue(":currentUserID", currentUserID);
+  q.exec();
+  q.next();
+
+  return static_cast<UserRoles>(q.value(0).toInt());
 }
 
 dbWorks::~dbWorks()
