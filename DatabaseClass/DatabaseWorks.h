@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QSqlError>
 #include <QDir>
+#include <QCryptographicHash>
 
 enum class UserRoles;
 
@@ -83,4 +84,10 @@ private:
 
   QSqlDatabase db;
   unsigned currentUserID;
+
+  // Преобразует строку в Sha256-хэшированную строку.
+  // Используется для шифрования паролей пользователей.
+  QString stringToSha256(const QString str) {
+    return QCryptographicHash::hash(str.toUtf8(), QCryptographicHash::Sha256).toHex();
+  }
 };
