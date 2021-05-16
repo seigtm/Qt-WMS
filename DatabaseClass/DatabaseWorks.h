@@ -11,8 +11,8 @@ enum class UserRoles;
 
 class dbWorks {
   // TODO: Fix this path to database.
-  const QString pathToDB = "C:/Users/seigt/OneDrive/Documents/GitHub/PRACTICE/SportLuxApp/Databases/SportLux.db";
-  // const QString pathToDB = QDir::currentPath() + "/Databases/SportLux.db";
+  // const QString pathToDB = "C:/Users/seigt/OneDrive/Documents/GitHub/PRACTICE/SportLuxApp/Databases/SportLux.db";
+  const QString pathToDB = QDir::currentPath() + "/Databases/SportLux.db";
 
 public:
   // Синглтон инстанс для БД.
