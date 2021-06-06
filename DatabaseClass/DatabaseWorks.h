@@ -6,6 +6,7 @@
 #include <QSqlError>
 #include <QDir>
 #include <QCryptographicHash>
+#include <cassert>
 
 enum class UserRoles;
 

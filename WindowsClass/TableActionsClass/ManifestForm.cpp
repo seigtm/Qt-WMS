@@ -34,7 +34,7 @@ ManifestForm::ManifestForm(TableTypes type,
                     "FROM SHIPMENTS "
                     "INNER JOIN PRODUCTS ON "
                     "PRODUCTS.idProduct = SHIPMENTS.idProduct "
-                    "ORDER BY idPosition DESC "
+                    "ORDER BY idShipment DESC "
                     "LIMIT " + QString::number(rowCount) + ";");
   }
   else {

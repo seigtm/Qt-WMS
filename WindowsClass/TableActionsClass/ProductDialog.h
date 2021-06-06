@@ -4,6 +4,7 @@
 #include <QSqlQueryModel>
 #include <QInputDialog>
 #include <QMessageBox>
+#include <QComboBox>
 
 enum class ButtonNewTypes;
 
